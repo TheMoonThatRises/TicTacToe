@@ -1,7 +1,4 @@
 package io.github.rangeremerald.tictactoegammawave.objects;
-
-import com.sun.istack.internal.Nullable;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
