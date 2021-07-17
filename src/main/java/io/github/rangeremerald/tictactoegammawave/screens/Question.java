@@ -1,11 +1,8 @@
 package io.github.rangeremerald.tictactoegammawave.screens;
 
 import io.github.rangeremerald.tictactoegammawave.TicTacToe;
-import io.github.rangeremerald.tictactoegammawave.objects.FactHolder;
-import io.github.rangeremerald.tictactoegammawave.objects.MutipleChoice;
-import io.github.rangeremerald.tictactoegammawave.objects.MutipleChoice.RectColourHolder;
-import io.github.rangeremerald.tictactoegammawave.objects.Piece;
-import io.github.rangeremerald.tictactoegammawave.objects.QuestionHolder;
+import io.github.rangeremerald.tictactoegammawave.objects.*;
+import io.github.rangeremerald.tictactoegammawave.objects.TextHitbox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URI;
+import java.net.URL;
 
 public class Question extends JFrame {
 
@@ -108,7 +107,6 @@ public class Question extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (isCorrect == 'y' || isCorrect == 'n') return;
             try {
                 timer.restart();
 
@@ -116,12 +114,24 @@ public class Question extends JFrame {
 
                 boolean handReached = false;
 
-                for (RectColourHolder questionRect : mutipleChoice.questionRectList)
-                    if (mouseRect.intersects(questionRect.hitBoxOutline)) {
-                        handReached = true;
+                if (isCorrect == 'y' || isCorrect == 'n') {
+                    if (factHolder.imageLink.hitBoxOutline.intersects(mouseRect)) {
                         setCursor(new Cursor(Cursor.HAND_CURSOR));
-                        questionRect.colour = Color.orange;
-                    } else questionRect.colour = Color.black;
+                        handReached = true;
+                    }
+                } else {
+                        for (TextHitbox questionRect : mutipleChoice.questionRectList)
+                            if (mouseRect.intersects(questionRect.hitBoxOutline)) {
+                                handReached = true;
+                                setCursor(new Cursor(Cursor.HAND_CURSOR));
+                                questionRect.colour = Color.orange;
+                            } else questionRect.colour = Color.black;
+
+                        if (mutipleChoice.imageLink.hitBoxOutline.intersects(mouseRect)) {
+                            setCursor(new Cursor(Cursor.HAND_CURSOR));
+                            handReached = true;
+                        }
+                }
 
                 if (!handReached) setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 repaint();
@@ -130,23 +140,40 @@ public class Question extends JFrame {
         
         @Override
         public void mouseReleased(MouseEvent e) {
-            if (isCorrect == 'y' || isCorrect == 'n') return;
-
+            Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
             Rectangle mouseRect = new Rectangle(MouseInfo.getPointerInfo().getLocation().x - getLocationOnScreen().x, MouseInfo.getPointerInfo().getLocation().y - getLocationOnScreen().y, 1, 1);
-            
-            for (RectColourHolder questionRect : mutipleChoice.questionRectList) if (mouseRect.intersects(questionRect.hitBoxOutline)) {
-                boolean userCorrect = questionRect.answer.equals(mutipleChoice.questionHolder.answerPool.get(Math.toIntExact(mutipleChoice.questionHolder.answer)));
-                if (userCorrect) isCorrect = 'y';
-                else isCorrect = 'n';
 
-                if (isCorrect == 'y') questionRect.colour = Color.green;
-                else questionRect.colour = Color.red;
+            if (isCorrect == 'y' || isCorrect == 'n') {
+                if (factHolder.imageLink != null && factHolder.imageLink.hitBoxOutline.intersects(mouseRect)) {
+                    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                        try {
+                            desktop.browse(new URL(factHolder.imageLink.text).toURI());
+                        } catch (Exception ignored) { }
+                    }
+                }
+            } else {
+                for (TextHitbox questionRect : mutipleChoice.questionRectList) if (mouseRect.intersects(questionRect.hitBoxOutline)) {
+                    boolean userCorrect = questionRect.text.equals(mutipleChoice.questionHolder.answerPool.get(Math.toIntExact(mutipleChoice.questionHolder.answer)));
+                    if (userCorrect) isCorrect = 'y';
+                    else isCorrect = 'n';
 
-                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                
-                repaint();
+                    if (isCorrect == 'y') questionRect.colour = Color.green;
+                    else questionRect.colour = Color.red;
 
-                userAnswer(userCorrect);
+                    setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+                    repaint();
+
+                    userAnswer(userCorrect);
+                }
+
+                if (mutipleChoice.imageLink != null && mutipleChoice.imageLink.hitBoxOutline.intersects(mouseRect)) {
+                    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                        try {
+                            desktop.browse(new URL(mutipleChoice.imageLink.text).toURI());
+                        } catch (Exception ignored) { }
+                    }
+                }
             }
         }
 

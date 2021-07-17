@@ -12,29 +12,16 @@ public class MutipleChoice {
     public int[] imageCoords;
     public int textSize;
     public Font font;
-    public List<RectColourHolder> questionRectList = new ArrayList<>();
-
-    public static class RectColourHolder {
-
-        public Rectangle hitBoxOutline, checkBox;
-        public String answer;
-        public Color colour;
-
-        public RectColourHolder(Rectangle hitBoxOutline, Rectangle checkBox, String answer) {
-            this.hitBoxOutline = hitBoxOutline;
-            this.checkBox = checkBox;
-            this.answer = answer;
-            this.colour = null;
-        }
-
-    }
+    public List<TextHitbox> questionRectList = new ArrayList<>();
+    public TextHitbox imageLink;
+    public Font imageLinkFont;
 
     private void initQuestion() {
         for (int position = 0; position < questionHolder.answerPool.size(); position++) {
             Rectangle hitbox = new Rectangle(0, 250 + textSize * position, TicTacToe.questionWidth, 10);
             Rectangle checkbox = new Rectangle(hitbox.x, hitbox.y, 10, 10);
             
-            questionRectList.add(new RectColourHolder(hitbox, checkbox, questionHolder.answerPool.get(position)));
+            questionRectList.add(new TextHitbox(hitbox, checkbox, questionHolder.answerPool.get(position)));
         }
         if (questionHolder.questionImage != null) imageCoords = new int[]{TicTacToe.questionWidth / 2 - questionHolder.questionImage.getIconWidth() / 2, 30};
     }
@@ -43,6 +30,7 @@ public class MutipleChoice {
         this.questionHolder = questionHolder;
         this.textSize = 20;
         this.font = new Font(Font.MONOSPACED, Font.PLAIN, textSize);
+        this.imageLinkFont = new Font(Font.MONOSPACED, Font.PLAIN, 10);
 
         initQuestion();
     }
@@ -51,15 +39,26 @@ public class MutipleChoice {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        if (questionHolder.questionImage != null) questionHolder.questionImage.paintIcon(c, g, imageCoords[0], imageCoords[1]);
+        if (questionHolder.questionImage != null) {
+            if (imageLink == null) {
+                int imageLinkWidth = g.getFontMetrics(imageLinkFont).stringWidth(questionHolder.questionImageLink);
+                Rectangle imageLinkHitbox = new Rectangle(TicTacToe.questionWidth / 2 - imageLinkWidth / 2, imageCoords[1] + 210 - imageLinkFont.getSize(), imageLinkWidth, imageLinkFont.getSize());
+                imageLink = new TextHitbox(imageLinkHitbox, null, questionHolder.questionImageLink);
+                imageLink.colour = Color.blue.brighter();
+            }
+            g.setFont(imageLinkFont);
+            g.setColor(imageLink.colour);
 
-        g.setFont(font);
+            questionHolder.questionImage.paintIcon(c, g, imageCoords[0], imageCoords[1]);
+            g.drawString(imageLink.text, imageLink.hitBoxOutline.x, imageLink.hitBoxOutline.y + imageLinkFont.getSize());
+        }
 
         g.setColor(Color.black);
+        g.setFont(font);
         
         g.drawString(questionHolder.question, TicTacToe.questionWidth / 2 - g.getFontMetrics(font).stringWidth(questionHolder.question) / 2, 20);
 
-        for (RectColourHolder colourHolder : questionRectList) {
+        for (TextHitbox colourHolder : questionRectList) {
             g2d.setStroke(new BasicStroke(1.5F));
 
             g.setColor(colourHolder.colour);
@@ -70,7 +69,7 @@ public class MutipleChoice {
 
             g.setFont(font);
 
-            g.drawString(colourHolder.answer, colourHolder.checkBox.x + 20, colourHolder.checkBox.y + 15);
+            g.drawString(colourHolder.text, colourHolder.checkBox.x + 20, colourHolder.checkBox.y + 15);
         }
 
     }
