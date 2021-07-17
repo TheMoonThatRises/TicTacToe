@@ -1,0 +1,112 @@
+{
+  "questionList": [
+    {
+      "question": "Is gamma wave mechanical or electromagnetic?",
+      "answerPool": [
+        "The gamma wave is a mechanical wave",
+        "The gamma wave is an electromagnetic wave",
+        "The gamma wave is neither of them",
+        "The gamma wave is both of them"
+      ],
+      "answer": 1,
+      "imageName": "electromagneticspectrum.jpg"
+    },
+    {
+      "question": "Does the gamma wave need a medium?",
+      "answerPool": [
+        "The gamma wave does not need a medium and can travel through dense material",
+        "The gamma wave needs a medium and can travel through dense material",
+        "The gamma wave does not need a medium and cannot travel through dense material",
+        "The gamma wave needs a medium and cannot travel through dense material"
+      ],
+      "answer": 2,
+      "imageName": "gammarayburst.jpg"
+    },
+    {
+      "question": "If the gamma wave is an EM wave, where does it fall on the EM spectrum?",
+      "answerPool": [
+        "The gamma wave falls above x-rays in the electromagnetic spectrum",
+        "The gamma wave falls below the radio wave in the electromagnetic spectrum",
+        "The gamma wave is not in the electromagnetic spectrum",
+        "None of them"
+      ],
+      "answer": 0,
+      "imageName": "spectrumgamma.png"
+    },
+    {
+      "question": "What is the size and shape of the gamma wave?",
+      "answerPool": [
+        "The gamma wave is 100 picometers in size and has a conical shape",
+        "The gamma wave is 50 picometers in size and has a conical shape",
+        "The gamma wave is 25 picometers in size and has a conical shape",
+        "None of them."
+      ],
+      "answer": 1,
+      "imageName": "gammarayshape.jpg"
+    },
+    {
+      "question" : "What type of wave is the gamma wave?",
+      "answerPool": [
+        "The gamma wave is a longitudinal wave",
+        "The gamma wave is a transverse wave",
+        "The gamma wave is neither of them",
+        "The gamma wave is both of them"
+      ],
+      "answer": 1,
+      "imageName": "longitudinal-transverse-waves.png"
+    },
+    {
+      "question": "Where is the gamma rays typically found?",
+      "answerPool": [
+        "The gamma ray is found in avocados",
+        "The gamma ray is found in bananas",
+        "The gamma ray is found in decaying isotopes",
+        "All of the them"
+      ],
+      "answer": 3,
+      "imageName": null
+    },
+    {
+      "question": "Is the gamma wave visible to the human eye?",
+      "answerPool": [
+        "The gamma wave is visible to the human eye",
+        "The gamma wave is not visible to the human eye"
+      ],
+      "answer": 1,
+      "imageName": null
+    },
+    {
+      "question": "Who discovered the gamma wave?",
+      "answerPool": [
+        "Pierre Curie “discovered” the gamma wave in the 1900’s",
+        "The person who “discovered” the gamma wave is unknown",
+        "Ernest Rutherford “discovered” the gamma wave in the 1900’s",
+        "Paul Villard “discovered” the gamma wave in the 1900’s"
+      ],
+      "answer": 3,
+      "imageName": "gamma-founder.jpg"
+    },
+    {
+      "question": "Which one of these facts are true about the gamma wave?",
+      "answerPool": [
+        "Gamma rays is the smallest wave and has the highest energy",
+        "Gamma rays is the smallest wave and has the lowest energy",
+        "Gamma rays is the largest wave and has the highest energy",
+        "Gamma rays is the largest wave and has the lowest energy"
+      ],
+      "answer": 0,
+      "imageName": "gammaray2.jpg"
+    },
+    {
+      "question": "Which one of these is true?",
+      "answerPool": [
+        "Gamma rays can come from decaying isotopes such as potassium 30",
+        "Gamma rays can come from decaying isotopes such as potassium 41",
+        "Gamma rays can come from decaying isotopes such as potassium 49",
+        "Gamma rays can come from decaying isotopes such as potassium 40"
+      ],
+      "answer": 3,
+      "imageName": "gammaraypot.png"
+    }
+  ]
+}

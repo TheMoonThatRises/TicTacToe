@@ -1,0 +1,44 @@
+{
+  "facts": [
+    {
+      "fact": "The gamma ray can be both useful and harmful. It can be useful in Nuclear Reactors to create electricity. Along with that, it can be used to kill cancer cells. But can be harmful to the human body, and could kill you after a certain length of exposure to it.",
+      "image": "braingamma.jpg"
+    },
+    {
+      "fact": "Gamma waves can penetrate through concrete and steel.",
+      "image": "penetrating-power-rad.png"
+    },
+    {
+      "fact": "Gamma waves are made from exploding stars, annihilation of electrons, and the decay of radioactive atoms.",
+      "image": "explodingstars.jpg"
+    },
+    {
+      "fact": "There are a lot of gamma ray bursts in deep space from dying or colliding stars.",
+      "image": "collidingstars.jpg"
+    },
+    {
+      "fact": "Gamma waves are made from exploding stars, annihilation of electrons, and the decay of radioactive atoms.",
+      "image": "decayatom.jpg"
+    },
+    {
+      "fact": "Scientists use gamma waves in surgery.",
+      "image": "braingamma.jpg"
+    },
+    {
+      "fact": "Gamma waves are named by order in the greek alphabet, gamma the third letter named because it penetrated through lead father than alpha and beta.",
+      "image": "gammaname.png"
+    },
+    {
+      "fact": "Almost all gamma rays get absorbed by the atmosphere around earth.",
+      "image": "earthwithsun.jpg"
+    },
+    {
+      "fact": "Thunderstorms can release gamma rays.",
+      "image": "thunderstorm.jpg"
+    },
+    {
+      "fact": "Scientists can use gamma rays to determine the elements on other planets.",
+      "image": "distantplanet.jpg"
+    }
+  ]
+}
