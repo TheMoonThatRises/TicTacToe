@@ -13,8 +13,6 @@ import org.json.simple.parser.ParseException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 
 public class Credits extends JFrame {
@@ -30,8 +28,8 @@ public class Credits extends JFrame {
 
     private static class CreditScreen extends JPanel implements ActionListener, MouseListener {
 
-        private ButtonHoverAnim buttonHoverAnim;
-        private CreditButtons creditButtons;
+        private final ButtonHoverAnim buttonHoverAnim;
+        private final CreditButtons creditButtons;
 
         private boolean inithash = false;
 

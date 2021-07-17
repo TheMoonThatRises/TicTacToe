@@ -42,7 +42,7 @@ public class Question extends JFrame {
             runTimer.start();
         });
 
-        private Piece userSetPiece;
+        private final Piece userSetPiece;
 
         public char isCorrect = 'z';
 
