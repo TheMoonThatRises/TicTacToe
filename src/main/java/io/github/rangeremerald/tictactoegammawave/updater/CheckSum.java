@@ -1,4 +1,4 @@
-package io.github.rangeremerald.tictactoegammawave.Updater;
+package io.github.rangeremerald.tictactoegammawave.updater;
 
 import java.io.FileInputStream;
 import java.io.IOException;

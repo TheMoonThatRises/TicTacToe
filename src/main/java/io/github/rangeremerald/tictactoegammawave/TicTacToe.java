@@ -1,6 +1,6 @@
 package io.github.rangeremerald.tictactoegammawave;
 
-import io.github.rangeremerald.tictactoegammawave.Updater.Updater;
+import io.github.rangeremerald.tictactoegammawave.updater.Updater;
 import io.github.rangeremerald.tictactoegammawave.screens.Board;
 import io.github.rangeremerald.tictactoegammawave.screens.Credits;
 import io.github.rangeremerald.tictactoegammawave.screens.Question;

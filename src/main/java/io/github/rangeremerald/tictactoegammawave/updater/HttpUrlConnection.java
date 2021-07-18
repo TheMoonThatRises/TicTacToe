@@ -1,4 +1,4 @@
-package io.github.rangeremerald.tictactoegammawave.Updater;
+package io.github.rangeremerald.tictactoegammawave.updater;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
