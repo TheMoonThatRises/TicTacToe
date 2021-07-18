@@ -11,7 +11,7 @@ public class CheckSum {
 
         // file hashing with DigestInputStream
         try (DigestInputStream dis = new DigestInputStream(new FileInputStream(filepath), md)) {
-            while (dis.read() != -1) ; //empty loop to clear the data
+            while (dis.read() != -1); //empty loop to clear the data
             md = dis.getMessageDigest();
         }
 
