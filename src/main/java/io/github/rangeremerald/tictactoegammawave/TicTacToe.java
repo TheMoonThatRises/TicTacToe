@@ -7,8 +7,6 @@ import io.github.rangeremerald.tictactoegammawave.screens.Question;
 import io.github.rangeremerald.tictactoegammawave.screens.WelcomeScreen;
 
 import javax.swing.*;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 public class TicTacToe extends JFrame {
 
@@ -39,9 +37,8 @@ public class TicTacToe extends JFrame {
         welcomeScreen.dispose();
     }
 
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-        if (args.length < 1) new Updater(null);
-        else new Updater(args[0]);
+    public static void main(String[] args) throws Exception {
+        new Updater();
 
         new TicTacToe();
     }
