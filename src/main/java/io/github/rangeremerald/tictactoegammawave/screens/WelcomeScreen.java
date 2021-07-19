@@ -15,8 +15,7 @@ public class WelcomeScreen extends JFrame {
 
         try {
             TimeUnit.MILLISECONDS.sleep(500);
-        } catch (InterruptedException ignored) {
-        }
+        } catch (InterruptedException ignored) { }
     }
 
     private static class LoadingScreen extends JPanel {
