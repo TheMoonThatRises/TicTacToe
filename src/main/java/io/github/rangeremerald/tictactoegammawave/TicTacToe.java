@@ -1,10 +1,7 @@
 package io.github.rangeremerald.tictactoegammawave;
 
+import io.github.rangeremerald.tictactoegammawave.screens.*;
 import io.github.rangeremerald.tictactoegammawave.updater.Updater;
-import io.github.rangeremerald.tictactoegammawave.screens.Board;
-import io.github.rangeremerald.tictactoegammawave.screens.Credits;
-import io.github.rangeremerald.tictactoegammawave.screens.Question;
-import io.github.rangeremerald.tictactoegammawave.screens.WelcomeScreen;
 
 import javax.swing.*;
 
