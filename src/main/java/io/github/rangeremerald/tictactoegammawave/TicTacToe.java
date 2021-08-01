@@ -13,7 +13,7 @@ public class TicTacToe extends JFrame {
     public static final int questionWidth = windowWidth + 300;
     public static final int questionHeight = windowHeight - 100;
 
-    public static Credits creditScreen = null;
+    public static Settings settingsScreen = null;
     public static Question questionScreen = null;
     public static Board board = null;
 
