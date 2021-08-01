@@ -6,7 +6,7 @@ public class Button {
 
     public final Rectangle buttonRect;
     public final DrawString drawStringTotal;
-    public final Color rectColour;
+    public Color rectColour;
     public final ButtonAnimation buttonAnimation;
     public final int xpos;
     public final int ypos;
@@ -36,8 +36,9 @@ public class Button {
 
         public final int xpos;
         public final int ypos;
-        public final int length;
+        public int length;
         public int width;
+        public int animSpeed;
         public final int rounded;
         public final Color animationColour;
 
@@ -48,6 +49,7 @@ public class Button {
             this.width = width;
             this.rounded = rounded;
             this.animationColour = Color.blue;
+            this.animSpeed = 5;
         }
 
     }
