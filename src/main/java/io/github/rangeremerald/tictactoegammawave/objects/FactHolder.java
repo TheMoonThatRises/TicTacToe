@@ -1,7 +1,7 @@
 package io.github.rangeremerald.tictactoegammawave.objects;
 
 import io.github.rangeremerald.tictactoegammawave.TicTacToe;
-import io.github.rangeremerald.tictactoegammawave.creditHelper.WordWrap;
+import io.github.rangeremerald.tictactoegammawave.helper.WordWrap;
 import io.github.rangeremerald.tictactoegammawave.helper.ReadJsonFile;
 
 import org.json.simple.JSONObject;

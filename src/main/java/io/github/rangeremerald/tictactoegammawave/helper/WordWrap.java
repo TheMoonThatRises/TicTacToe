@@ -1,4 +1,4 @@
-package io.github.rangeremerald.tictactoegammawave.creditHelper;
+package io.github.rangeremerald.tictactoegammawave.helper;
 
 import java.awt.*;
 
