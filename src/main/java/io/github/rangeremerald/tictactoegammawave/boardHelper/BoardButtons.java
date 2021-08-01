@@ -30,8 +30,11 @@ public class BoardButtons extends ScreenButtonsHelper {
                 System.exit(0);
                 break;
             case "settings":
-                TicTacToe.settingsScreen = new Settings();
-                TicTacToe.settingsScreen.settings();
+                if (TicTacToe.settingsScreen == null) {
+                    TicTacToe.settingsScreen = new Settings();
+                    TicTacToe.settingsScreen.settings();
+                }
+                TicTacToe.settingsScreen.toFront();
                 break;
             case "restart":
                 TicTacToe.board.restartGame();
