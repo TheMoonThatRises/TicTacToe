@@ -29,7 +29,7 @@ public class Settings extends JFrame {
     public static class SettingsScreen extends JPanel implements ActionListener, MouseListener, MouseWheelListener {
 
         private final ArrayList<ButtonHoverAnim> buttonAnimList = new ArrayList<>();
-        public static HashMap<String, ScreenButtonsHelper> buttonsList = new HashMap<>();
+        public HashMap<String, ScreenButtonsHelper> buttonsList = new HashMap<>();
         public static int screen = 0;
         public static boolean recolour = false;
 
@@ -37,7 +37,7 @@ public class Settings extends JFrame {
         public static boolean initScrollingHash = false;
 
         private final Timer timer;
-        public static final int delay = 5;
+        public final int delay = 5;
 
         public SettingsScreen() {
             buttonsList.put("settingsButtons", new SettingsButtons());
@@ -63,6 +63,9 @@ public class Settings extends JFrame {
         public void paint(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+
+            g.setColor(Color.white);
+            g.fillRect(0, 0, getWidth(), getHeight());
 
             if (!inithash) {
                 inithash = buttonsList.get("settingsButtons").initHash(g);
@@ -90,6 +93,10 @@ public class Settings extends JFrame {
 
                     break;
             }
+
+            g.setColor(Color.white);
+            g.fillRect(0, 0, getWidth(), buttonsList.get("switchTabButtons").rectHeight + 10);
+            g.fillRect(0, buttonsList.get("settingsButtons").ypos - 10, getWidth(), buttonsList.get("settingsButtons").rectHeight + 10);
 
             buttonsList.get("settingsButtons").drawButtons(g);
             buttonsList.get("switchTabButtons").drawButtons(g);

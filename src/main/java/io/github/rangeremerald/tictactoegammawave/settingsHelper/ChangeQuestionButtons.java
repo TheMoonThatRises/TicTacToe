@@ -32,7 +32,7 @@ public class ChangeQuestionButtons extends ScreenButtonsHelper {
 
     @Override
     public void drawButtons(Graphics g) {
-        for (Button button : buttonHash.values()) if ((Settings.SettingsScreen.buttonsList.get("settingsButtons").buttonHash.get("Exit").ypos > button.ypos + button.height) && (Settings.SettingsScreen.buttonsList.get("switchTabButtons").ypos + Settings.SettingsScreen.buttonsList.get("switchTabButtons").rectHeight + 30 < button.ypos + rectHeight)) button.drawButton(g);
+        for (Button button : buttonHash.values()) button.drawButton(g);
     }
 
     @Override
