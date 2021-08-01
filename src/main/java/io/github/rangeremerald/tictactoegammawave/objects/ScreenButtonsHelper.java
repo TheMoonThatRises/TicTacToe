@@ -7,17 +7,18 @@ import java.util.HashMap;
 public abstract class ScreenButtonsHelper {
 
     //Default values
-    public final int roundedSize = 20;
-    public final int rectHeight = 80;
-    public final int rectWidth = 200;
+    public int roundedSize = 20;
+    public int rectHeight = 80;
+    public int rectWidth = 200;
 
-    public final int size = 40;
+    public int size = 40;
 
     public ArrayList<String> buttonNames = new ArrayList<>();
     public final HashMap<String, Button> buttonHash = new HashMap<>();
 
     public int xpos = 0;
     public int ypos = 0;
+    public int scrollDisplace = 0;
     protected int namePos = 1;
 
     public void drawButtons(Graphics g) {
@@ -36,6 +37,8 @@ public abstract class ScreenButtonsHelper {
 
     public abstract void updatePos(int width, int height);
 
+    public abstract void updateAnimSpeed(int speed);
+
     public String addButtonReInit(String text, Graphics g) {
         buttonNames.add(text);
         initHash(g);
@@ -47,5 +50,17 @@ public abstract class ScreenButtonsHelper {
         buttonNames.remove(text);
         return false;
     }
+
+    public void buttonPressed(Rectangle mouseRect, Runnable waitCursor, Runnable defaultCursor) {
+        for (Button button : buttonHash.values()) {
+            if (mouseRect.intersects(button.buttonRect)) {
+                whichButton(button, waitCursor, defaultCursor);
+                break;
+            }
+        }
+    }
+
+    public abstract void whichButton(Button pressedButton, Runnable waitCursor, Runnable defaultCursor);
+
 
 }
