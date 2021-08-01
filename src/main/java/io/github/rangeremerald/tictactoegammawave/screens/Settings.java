@@ -39,7 +39,18 @@ public class Settings extends JFrame {
         private final Timer timer;
         public final int delay = 5;
 
+        public void resetSettings() {
+            screen = 0;
+            buttonsList.clear();
+            buttonAnimList.clear();
+            inithash = false;
+            recolour = false;
+            initScrollingHash = false;
+        }
+
         public SettingsScreen() {
+            resetSettings();
+
             buttonsList.put("settingsButtons", new SettingsButtons());
             buttonsList.put("switchTabButtons", new SwitchTabButtons());
             buttonsList.put("changeQuestionButtons", new ChangeQuestionButtons());
