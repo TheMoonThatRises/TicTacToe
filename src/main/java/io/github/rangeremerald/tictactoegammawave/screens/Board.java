@@ -7,7 +7,6 @@ import io.github.rangeremerald.tictactoegammawave.boardHelper.CheckMove;
 import io.github.rangeremerald.tictactoegammawave.helper.ButtonHoverAnim;
 import io.github.rangeremerald.tictactoegammawave.helper.FactAdder;
 import io.github.rangeremerald.tictactoegammawave.helper.QuestionAdder;
-import io.github.rangeremerald.tictactoegammawave.objects.Button;
 import io.github.rangeremerald.tictactoegammawave.objects.FactHolder;
 import io.github.rangeremerald.tictactoegammawave.objects.Piece;
 import io.github.rangeremerald.tictactoegammawave.objects.QuestionHolder;
@@ -45,8 +44,8 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
 
     protected BoardButtons boardButtons = null;
 
-    List<QuestionHolder> questionPool = new ArrayList<>();
-    List<FactHolder> factPool = new ArrayList<>();
+    public List<QuestionHolder> questionPool = new ArrayList<>();
+    public List<FactHolder> factPool = new ArrayList<>();
 
     private final Timer timer;
     public static final int delay = 5;
@@ -209,7 +208,7 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
         repaint();
     }
 
-    private void restartGame() {
+    public void restartGame() {
         initHash = boardButtons.removeButtonInit("Restart");
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         winBar = new ArrayList<>();
@@ -222,33 +221,19 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        Rectangle mouseRect = new Rectangle(e.getX(), e.getY(), 1, 1);
+        try {
+            Rectangle mouseRect = new Rectangle(e.getX(), e.getY(), 1, 1);
 
-        for (Button button : boardButtons.buttonHash.values()) {
-            if (mouseRect.intersects(button.buttonRect)) {
-                switch (button.drawStringTotal.text.toLowerCase()) {
-                    case "quit":
-                        setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                        System.exit(0);
-                        break;
-                    case "credits":
-                        TicTacToe.creditScreen = new Credits();
-                        TicTacToe.creditScreen.credits();
-                        break;
-                    case "restart":
-                        restartGame();
-                        return;
+            boardButtons.buttonPressed(mouseRect, () -> new Cursor(Cursor.WAIT_CURSOR), () -> new Cursor(Cursor.DEFAULT_CURSOR));
+
+            if (gameDone) return;
+
+            for (Piece piece : pieceArray) {
+                if (mouseRect.intersects(piece.rectangle)) {
+                    setQuestionScreen(piece);
                 }
             }
-        }
-
-        if (gameDone) return;
-
-        for (Piece piece : pieceArray) {
-            if (mouseRect.intersects(piece.rectangle)) {
-                setQuestionScreen(piece);
-            }
-        }
+        } catch (IllegalComponentStateException ignored) { }
     }
 
     @Override
@@ -276,13 +261,13 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        boolean isButtonAnimated = false;
-
         try {
+            boolean isButtonAnimated = false;
+
             timer.restart();
             Rectangle mouseRect = new Rectangle(MouseInfo.getPointerInfo().getLocation().x - getLocationOnScreen().x, MouseInfo.getPointerInfo().getLocation().y - getLocationOnScreen().y, 1, 1);
 
-            if (boardButtons != null) isButtonAnimated = buttonHoverAnim.reAnimate(mouseRect, this::repaint, () -> setCursor(new Cursor(Cursor.HAND_CURSOR)), () -> setCursor(new Cursor(Cursor.DEFAULT_CURSOR)));
+            if (boardButtons != null) isButtonAnimated = buttonHoverAnim.animate(mouseRect, this::repaint, () -> setCursor(new Cursor(Cursor.HAND_CURSOR)), () -> setCursor(new Cursor(Cursor.DEFAULT_CURSOR)));
 
             if (!isButtonAnimated) {
                 //If mouse hovers over an open space
@@ -301,7 +286,17 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
 
                 if (pieceAmount >= Math.pow(tictactoeSize, 2)) setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
-        } catch (Exception ignored) { }
+        } catch (IllegalComponentStateException ignored) { }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        try {
+            timer.restart();
+            Rectangle mouseRect = new Rectangle(MouseInfo.getPointerInfo().getLocation().x - getLocationOnScreen().x, MouseInfo.getPointerInfo().getLocation().y - getLocationOnScreen().y, 1, 1);
+
+            buttonHoverAnim.reAnimate(mouseRect, this::repaint, () -> setCursor(new Cursor(Cursor.HAND_CURSOR)));
+        } catch (IllegalComponentStateException ignored) { }
     }
 
     @Override
@@ -310,18 +305,8 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
             timer.restart();
             Rectangle mouseRect = new Rectangle(MouseInfo.getPointerInfo().getLocation().x - getLocationOnScreen().x, MouseInfo.getPointerInfo().getLocation().y - getLocationOnScreen().y, 1, 1);
 
-            for (Button button : buttonHoverAnim.toAnimationBack) {
-                if (mouseRect.intersects(button.buttonRect)) return;
-                button.drawStringTotal.textColour = Color.black;
-                if (button.buttonAnimation.width == 0) {
-                    buttonHoverAnim.toAnimationBack.remove(button);
-                    break;
-                }
-                button.buttonAnimation.width -= 5;
-                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                repaint();
-            }
-        } catch (Exception ignored) { }
+            buttonHoverAnim.unAnimate(mouseRect, this::repaint, () -> setCursor(new Cursor(Cursor.DEFAULT_CURSOR)));
+        } catch (IllegalComponentStateException ignored) { }
     }
 
     @Override
@@ -341,11 +326,6 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
 
     }
     

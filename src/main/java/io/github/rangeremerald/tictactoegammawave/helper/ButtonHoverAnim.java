@@ -15,33 +15,59 @@ public class ButtonHoverAnim {
         this.buttonsHelper = buttonsHelper;
     }
 
-    public boolean reAnimate(Rectangle mouseRect, Runnable repaint, Runnable setNewCursor, Runnable setOldCursor) {
+    public boolean animate(Rectangle mouseRect, Runnable repaint, Runnable setNewCursor, Runnable setOldCursor) {
         //If mouse hovers over button
-        for (Button button : buttonsHelper.buttonHash.values()) {
-            if (mouseRect.intersects(button.buttonRect)) {
-                button.drawStringTotal.textColour = Color.white;
-
-                setNewCursor.run();
-                if (button.buttonAnimation.width < button.width) {
-                    if (!toAnimationBack.contains(button)) toAnimationBack.add(button);
-                    button.buttonAnimation.width += 5;
-                    repaint.run();
-                }
-            }
-        }
+        boolean reAnimated = reAnimate(mouseRect, repaint, setNewCursor);
 
         //If mouse is not over a button that was animated
-        for (Button button : toAnimationBack) {
-            if (mouseRect.intersects(button.buttonRect)) return true;
-            button.drawStringTotal.textColour = Color.black;
-            if (button.buttonAnimation.width == 0) {
-                toAnimationBack.remove(button);
-                break;
+        boolean unAnimated = unAnimate(mouseRect, repaint, setOldCursor);
+
+        return reAnimated || unAnimated;
+    }
+
+    public boolean reAnimate(Rectangle mouseRect, Runnable repaint, Runnable setNewCursor) {
+        try {
+            boolean isAnimated = false;
+
+            for (Button button : buttonsHelper.buttonHash.values()) {
+                if (mouseRect.intersects(button.buttonRect)) {
+                    isAnimated = true;
+                    button.drawStringTotal.textColour = Color.white;
+
+                    setNewCursor.run();
+                    if (button.buttonAnimation.width < button.width) {
+                        if (!toAnimationBack.contains(button)) toAnimationBack.add(button);
+                        button.buttonAnimation.width += button.buttonAnimation.animSpeed;
+                        repaint.run();
+                    }
+                }
             }
-            button.buttonAnimation.width -= 5;
-            setOldCursor.run();
-            repaint.run();
-        }
+
+            return isAnimated;
+        } catch (Exception ignored) { }
+        return false;
+    }
+
+    public boolean unAnimate(Rectangle mouseRect, Runnable repaint, Runnable setOldCursor) {
+        try {
+            boolean isAnimated = false;
+
+            for (Button button : toAnimationBack) {
+                if (mouseRect.intersects(button.buttonRect)) return false;
+
+                isAnimated = true;
+                button.drawStringTotal.textColour = Color.black;
+                if (button.buttonAnimation.width == 0) {
+                    toAnimationBack.remove(button);
+                    break;
+                }
+                button.buttonAnimation.width -= button.buttonAnimation.animSpeed;
+                setOldCursor.run();
+                repaint.run();
+            }
+
+            return isAnimated;
+        } catch (Exception ignored) { }
         return false;
     }
 }
