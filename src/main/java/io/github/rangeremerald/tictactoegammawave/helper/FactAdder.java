@@ -16,7 +16,7 @@ public class FactAdder {
 
         JSONArray factArray = null;
         try {
-            factArray = (JSONArray) ((JSONObject) new JSONParser().parse(new ReadJsonFile().readJsonFile("didyouknowfacts.json"))).get("facts");
+            factArray = (JSONArray) ((JSONObject) new JSONParser().parse(new ReadJsonFile().readJsonFile("facts.json"))).get("facts");
         } catch (ParseException ignored) { }
 
         assert factArray != null;
