@@ -3,9 +3,9 @@ package io.github.rangeremerald.tictactoegammawave.screens;
 import io.github.rangeremerald.tictactoegammawave.TicTacToe;
 import io.github.rangeremerald.tictactoegammawave.objects.Button;
 import io.github.rangeremerald.tictactoegammawave.objects.ScreenButtonsHelper;
-import io.github.rangeremerald.tictactoegammawave.objects.TextBox;
 import io.github.rangeremerald.tictactoegammawave.settingsHelper.*;
 import io.github.rangeremerald.tictactoegammawave.helper.ButtonHoverAnim;
+import io.github.rangeremerald.tictactoegammawave.settingsHelper.factQuestionEditHelper.QuestionFactUpdatePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +33,8 @@ public class Settings extends JFrame {
         public static int screen = 0;
         public static boolean recolour = false;
 
+        public static QuestionFactUpdatePanel updateQuestionPanel = null;
+
         private boolean inithash = false;
         public static boolean initScrollingHash = false;
 
@@ -46,6 +48,7 @@ public class Settings extends JFrame {
             inithash = false;
             recolour = false;
             initScrollingHash = false;
+            updateQuestionPanel = null;
         }
 
         public SettingsScreen() {
@@ -125,6 +128,13 @@ public class Settings extends JFrame {
             return true;
         }
 
+        public static void exitSettings(Runnable waitCursor, Runnable defaultCursor) {
+            waitCursor.run();
+            TicTacToe.settingsScreen.dispose();
+            TicTacToe.settingsScreen = null;
+            defaultCursor.run();
+        }
+
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -199,82 +209,6 @@ public class Settings extends JFrame {
 
         @Override
         public void mousePressed(MouseEvent e) {
-
-        }
-    }
-
-    public static class ChangeQuestionFact extends JPanel implements ActionListener, MouseListener, KeyListener {
-
-        private final ArrayList<ButtonHoverAnim> buttonAnimList = new ArrayList<>();
-        public static HashMap<String, ScreenButtonsHelper> buttonsList = new HashMap<>();
-
-        private boolean inithash = false;
-        private TextBox activeTextBox = null;
-
-        private final Timer timer;
-        public static final int delay = 5;
-
-        boolean isUpperCase = false;
-
-        public ChangeQuestionFact() {
-            setFocusable(true);
-            setBackground(Color.white);
-
-            addMouseListener(this);
-            addKeyListener(this);
-
-            timer = new Timer(delay, this);
-            timer.start();
-        }
-
-        public void paint(Graphics g) {
-
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (activeTextBox != null)
-                if (e.getKeyCode() == KeyEvent.VK_SHIFT) isUpperCase = true;
-                else activeTextBox.editTextBox(e, isUpperCase);
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            if (activeTextBox != null && e.getKeyCode() == KeyEvent.VK_SHIFT) isUpperCase = false;
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-
-        @Override
-        public void keyTyped(KeyEvent e) {
 
         }
     }
