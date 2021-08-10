@@ -2,7 +2,6 @@ package io.github.rangeremerald.tictactoegammawave.updater;
 
 import io.github.rangeremerald.tictactoegammawave.Private;
 
-import java.net.UnknownHostException;
 import java.security.MessageDigest;
 
 public class Updater {
@@ -18,13 +17,13 @@ public class Updater {
         try {
             String newGame = new HttpUrlConnection().httpUrlConnection(url);
 
-            if (newGame != null) {
+            if (newGame.contains(".jar")) {
                 Process runtime = Runtime.getRuntime().exec("java -jar " + selfFilePath);
                 if (runtime == null) throw new Exception("Updated jar file did not run.");
 
                 System.exit(0);
-            }
-        } catch (UnknownHostException exception) { exception.printStackTrace(); }
+            } else throw new Exception(newGame);
+        } catch (Exception exception) { exception.printStackTrace(); }
 
     }
 

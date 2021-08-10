@@ -35,6 +35,8 @@ public class HttpUrlConnection {
             if ((boolean) jsonResponse.get("success") && !((boolean) data.get("upToDate"))) {
                 new DownloadFile(String.valueOf(data.get("curlLink")));
                 return String.valueOf(data.get("jarName"));
+            } else if (!(boolean) jsonResponse.get("success")) {
+                throw new IOException(String.valueOf(data));
             }
         } catch (IOException | ParseException exception) { exception.printStackTrace(); }
         return null;
