@@ -19,7 +19,9 @@ public class FactHolder {
     public Font imageLinkFont, font;
 
     public FactHolder(String image, String fact) {
-        this.image = new ImageIcon(getClass().getResource("/images/" + image));
+        try {
+            this.image = new ImageIcon(getClass().getResource("/images/gameImages/" + image));
+        } catch (NullPointerException exception) { exception.printStackTrace(); }
         this.fact = fact;
         this.font = new Font(Font.MONOSPACED, Font.PLAIN, 20);
         imageLinkFont = new Font(Font.MONOSPACED, Font.PLAIN, 10);

@@ -23,7 +23,7 @@ public class QuestionHolder {
         this.answerPool = (List<String>) answerPool;
         
         if (fileName != null) {
-            this.questionImage = new ImageIcon(getClass().getResource("/images/" + fileName));
+            this.questionImage = new ImageIcon(getClass().getResource("/images/gameImages/" + fileName));
             try {
                 this.questionImageLink = (String) ((JSONObject) new JSONParser().parse(new ReadJsonFile().readJsonFile("imageCitations.json"))).get(fileName);
             } catch (ParseException ignored) { }
