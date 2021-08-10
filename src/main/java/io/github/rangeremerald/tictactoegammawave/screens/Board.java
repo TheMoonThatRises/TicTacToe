@@ -40,7 +40,7 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
     private String addPlayAgain = "false";
     private ButtonHoverAnim buttonHoverAnim = null;
 
-    private final ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/images/gammaray.jpg"));
+    private final ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/images/gameImages/gammaray.jpg"));
 
     protected BoardButtons boardButtons = null;
 
@@ -209,6 +209,11 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
     }
 
     public void restartGame() {
+        if (TicTacToe.questionScreen != null) {
+            TicTacToe.questionScreen.dispose();
+            TicTacToe.questionScreen = null;
+        }
+
         initHash = boardButtons.removeButtonInit("Restart");
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         winBar = new ArrayList<>();
