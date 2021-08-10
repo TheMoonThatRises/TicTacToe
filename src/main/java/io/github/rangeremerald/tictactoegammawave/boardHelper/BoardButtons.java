@@ -17,9 +17,9 @@ public class BoardButtons extends ScreenButtonsHelper {
     }
 
     @Override
-    public void updatePos(int width, int height) {
-        int b = (TicTacToe.windowHeight - (height * buttonNames.size())) / (buttonNames.size() + 1);
-        ypos = (namePos - 1) * height + namePos * b;
+    public void updatePos() {
+        int b = (TicTacToe.windowHeight - (rectHeight * buttonNames.size())) / (buttonNames.size() + 1);
+        ypos = (namePos - 1) * rectHeight + namePos * b;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class BoardButtons extends ScreenButtonsHelper {
                 System.exit(0);
                 break;
             case "settings":
-                if (TicTacToe.settingsScreen == null) {
+                if (TicTacToe.settingsScreen == null || !TicTacToe.settingsScreen.isVisible()) {
                     TicTacToe.settingsScreen = new Settings();
                     TicTacToe.settingsScreen.settings();
                 }

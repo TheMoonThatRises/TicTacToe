@@ -28,14 +28,14 @@ public abstract class ScreenButtonsHelper {
     public boolean initHash(Graphics g) {
         namePos = 1;
         for (String buttonName : buttonNames) {
-            updatePos(rectWidth, rectHeight);
+            updatePos();
             buttonHash.put(buttonName, new Button(xpos, ypos, rectHeight, rectWidth, buttonName, size, roundedSize, g));
             namePos++;
         }
         return true;
     }
 
-    public abstract void updatePos(int width, int height);
+    public abstract void updatePos();
 
     public abstract void updateAnimSpeed(int speed);
 

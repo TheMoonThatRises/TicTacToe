@@ -23,8 +23,8 @@ public class SwitchTabButtons extends ScreenButtonsHelper {
     }
 
     @Override
-    public void updatePos(int width, int height) {
-        xpos = width * namePos - 120;
+    public void updatePos() {
+        xpos = rectWidth * namePos - 120;
     }
 
     @Override

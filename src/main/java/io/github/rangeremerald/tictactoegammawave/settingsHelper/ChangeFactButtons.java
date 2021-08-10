@@ -25,9 +25,9 @@ public class ChangeFactButtons extends ScreenButtonsHelper {
     }
 
     @Override
-    public void updatePos(int width, int height) {
+    public void updatePos() {
         xpos = TicTacToe.settingsScreen.getWidth() / 2 - rectWidth / 2;
-        ypos = (height * namePos) + scrollDisplace + 30;
+        ypos = (rectHeight * namePos) + scrollDisplace + 30;
     }
 
     @Override
