@@ -58,18 +58,18 @@ public class MutipleChoice {
         
         g.drawString(questionHolder.question, TicTacToe.questionWidth / 2 - g.getFontMetrics(font).stringWidth(questionHolder.question) / 2, 20);
 
-        for (TextHitbox colourHolder : questionRectList) {
+        for (TextHitbox textHitbox : questionRectList) {
             g2d.setStroke(new BasicStroke(1.5F));
 
-            g.setColor(colourHolder.colour);
+            g.setColor(textHitbox.colour);
 
-            g.drawRect(colourHolder.checkBox.x, colourHolder.checkBox.y, colourHolder.checkBox.width, colourHolder.checkBox.height);
+            g.drawRect(textHitbox.checkBox.x, textHitbox.checkBox.y, textHitbox.checkBox.width, textHitbox.checkBox.height);
 
             g2d.setStroke(new BasicStroke());
 
             g.setFont(font);
 
-            g.drawString(colourHolder.text, colourHolder.checkBox.x + 20, colourHolder.checkBox.y + 15);
+            g.drawString(textHitbox.text, textHitbox.checkBox.x + 20, textHitbox.checkBox.y + 15);
         }
 
     }
