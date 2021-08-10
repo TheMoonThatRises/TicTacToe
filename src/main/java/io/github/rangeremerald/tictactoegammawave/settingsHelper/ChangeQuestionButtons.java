@@ -5,6 +5,7 @@ import io.github.rangeremerald.tictactoegammawave.helper.QuestionAdder;
 import io.github.rangeremerald.tictactoegammawave.objects.Button;
 import io.github.rangeremerald.tictactoegammawave.objects.ScreenButtonsHelper;
 import io.github.rangeremerald.tictactoegammawave.screens.Settings;
+import io.github.rangeremerald.tictactoegammawave.settingsHelper.factQuestionEditHelper.QuestionFactUpdatePanel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ public class ChangeQuestionButtons extends ScreenButtonsHelper {
     }
 
     @Override
-    public void updatePos(int width, int height) {
+    public void updatePos() {
         xpos = TicTacToe.settingsScreen.getWidth() / 2 - rectWidth / 2;
-        ypos = (height * namePos) + scrollDisplace + 30;
+        ypos = (rectHeight * namePos) + scrollDisplace + 30;
     }
 
     @Override
@@ -37,7 +38,10 @@ public class ChangeQuestionButtons extends ScreenButtonsHelper {
 
     @Override
     public void whichButton(Button pressedButton, Runnable waitCursor, Runnable defaultCursor) {
-
+        Settings.SettingsScreen.updateQuestionPanel = new QuestionFactUpdatePanel(pressedButton.drawStringTotal.text);
+        TicTacToe.settingsScreen.getContentPane().removeAll();
+        TicTacToe.settingsScreen.add(Settings.SettingsScreen.updateQuestionPanel);
+        TicTacToe.settingsScreen.setVisible(true);
     }
 
     @Override
