@@ -35,7 +35,7 @@ public class TicTacToe extends JFrame {
     }
 
     public static void main(String[] args) throws Exception {
-        //new Updater();
+        new Updater();
 
         new TicTacToe();
     }
